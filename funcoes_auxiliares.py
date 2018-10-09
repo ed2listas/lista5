@@ -13,8 +13,8 @@ def lerChar():
     str = sys.stdin.readline()
     return str[0]
 
-def lerInteger(msg="Digite o valor: "):
-    print("%s" % msg)
+def lerInteger():
+    #print("%s" % msg)
     valor = sys.stdin.readline()
     # validar para ver se é inteiro
     return int(valor);

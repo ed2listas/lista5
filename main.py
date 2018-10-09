@@ -1,10 +1,13 @@
 from funcoes_auxiliares import *
+from intervalPartitioning import *
+from intervalScheduling import *
+from minimizeLateness import *
 
 def menu():
     opcao = 0
     print("==========================================");
     print("|         >>>>>>>>> Menu <<<<<<<<<       |");
-    print("| 1 - aaaaaaaaaaaaa                      |");
+    print("| 1 - interval Scheduling                |");
     print("| 2 - bbbbbbbbbbbbb                      |");
     print("| 3 - cccccccccccccccccccccccccc         |");
     # outros
@@ -21,11 +24,13 @@ while opcao != 0:
     opcao = menu()
 
     if opcao == 1:
-        #intervalScheduling()
+        intervalScheduling()
     elif opcao == 2:
         #intervalPartitioning()
+        a = 1
     elif opcao == 3:
         #minimizeLateness() #Scheduling to Minimize Lateness
+        a = 1
     elif opcao == 0:
         print("Saindo...")
     else:
