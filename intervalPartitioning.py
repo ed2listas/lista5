@@ -4,8 +4,10 @@ import random
 
 classrooms_file = []
 classrooms = []
+grade = []
 start_activity = 8
 finish_activity = 20
+number_class_open = 0
 
 class Classroom:
     start = 0
@@ -16,6 +18,12 @@ class Classroom:
         self.start = start
         self.finish = finish
         self.name = name
+
+def search_for_time(obj):
+    for i in range(len(grade)):
+        if(obj.start >= grade[i][-1].finish):
+            return i
+    return -1
 
     
 with open ("companies.csv", "r") as f:
@@ -31,16 +39,29 @@ with open ("companies.csv", "r") as f:
 
 classrooms = random.sample(classrooms_file, 15)
 
-for i in classrooms:
-        print(i.start)
+
 
 print("\n")
 
 classrooms.sort(key=lambda x: x.start)
 
 
-for i in classrooms:
-        print(i.start)
+for i in classrooms: 
+    obj_compatibility = search_for_time(i)
+    print(obj_compatibility)
+
+    if(number_class_open == 0 and len(classrooms) != 0 or obj_compatibility == -1):
+        aux = []
+        aux.append(i)
+        grade. append(aux)
+        number_class_open += 1 
+    elif(obj_compatibility != -1):
+        grade[obj_compatibility].append(i)
+
+for i in range(len(grade)):
+    for j in range(len(grade[i])):
+        print("start: %d  finish: %d" %(grade[i][j].start, grade[i][j].finish))
+    print("amanda")
 
 
 
