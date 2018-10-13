@@ -61,6 +61,9 @@ def print_the_grades():
 
             print(" "*aux, end="")
             print("%s"%(grade[col][row].name), end="")
+            end = (grade[col][row].finish - grade[col][row].start - 1) * 11 + (10-len(grade[col][row].name))
+            print(" "*end, end="")    
+            print("*", end="")
         print("")
 
         for i in range(13):
