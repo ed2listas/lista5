@@ -31,7 +31,7 @@ def minimizeLateness():
     jobs.append(Job("4",4,9))
 
     limparTela()
-
+    printColorido("\t\t** minimize Lateness **\n","GREEN","NORMAL","ITALIC")
     print("Todas as tarefas:")
     for job in jobs:
         print("tarefa {}:  tempo = {}, deadline = {}".format(job.name, job.time, job.deadline))

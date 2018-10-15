@@ -19,6 +19,21 @@ def lerInteger():
     # validar para ver se é inteiro
     return int(valor);
 
+def menuComOpcao(opcoes=["inserir","retirar","finalizar"]):
+    opcao = 0
+    nro = 1
+    print("==========================================");
+    print("|         >>>>>>>>> Menu <<<<<<<<<       |");
+    for txt in opcoes:
+        if txt == opcoes[-1]:
+            nro = 0
+        print("| %d - %-35s|" % (nro, txt));
+        nro += 1
+    print("==========================================");
+    print("Sua opcao: ");
+    opcao = lerInteger()
+    return opcao;
+
 def isInteger(num):
     nums = "0123456789"
     size = len(num)

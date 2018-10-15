@@ -3,33 +3,22 @@ from intervalPartitioning import *
 from intervalScheduling import *
 from minimizeLateness import *
 
-def menu():
-    opcao = 0
-    print("==========================================");
-    print("|         >>>>>>>>> Menu <<<<<<<<<       |");
-    print("| 1 - interval Scheduling                |");
-    print("| 2 - interval Partitioning              |");
-    print("| 3 - minimize Lateness                  |");
-    print("| 0 - Sair                               |");
-    print("==========================================");
-    print("Sua opcao: ");
-    opcao = lerInteger()
-    return opcao;
 
 # função principal
 opcao = 1
 while opcao != 0:
     limparTela()
-    opcao = menu()
+    opcao = menuComOpcao([
+        "interval Scheduling",
+        "interval Partitioning",
+        "minimize Lateness", "Sair"])
 
     if opcao == 1:
         intervalScheduling()
     elif opcao == 2:
         intervalPartitioning()
-        a = 1
     elif opcao == 3:
         minimizeLateness()
-        a = 1
     elif opcao == 0:
         print("Saindo...")
     else:
