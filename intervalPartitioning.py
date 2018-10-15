@@ -2,12 +2,22 @@ import csv
 from funcoes_auxiliares import *
 import random
 
-classrooms_file = []
-classrooms = []
-grade = []
-start_activity = 8
-finish_activity = 20
-number_class_open = 0
+class Var:
+    lassrooms_file = []
+    classrooms = []
+    grade = []
+    start_activity = 8
+    finish_activity = 20
+    number_class_open = 0
+    def reset(self):
+        self.lassrooms_file = []
+        self.classrooms = []
+        self.grade = []
+        self.start_activity = 8
+        self.finish_activity = 20
+        self.number_class_open = 0
+
+var = Var()
 
 class Classroom:
     start = 0
@@ -20,16 +30,16 @@ class Classroom:
         self.name = name
 
 def search_for_time(obj):
-    for i in range(len(grade)):
-        if(obj.start >= grade[i][-1].finish):
+    for i in range(len(var.grade)):
+        if(obj.start >= var.grade[i][-1].finish):
             return i
     return -1
 
 def sum_string(row, col):
     plus = 0
-    for j in range(len(grade[row])):
+    for j in range(len(var.grade[row])):
         if(j < col):
-            plus += len(grade[row][j].name)
+            plus += len(var.grade[row][j].name)
     return plus
 
 
@@ -51,17 +61,17 @@ def print_the_grades():
         print("|", end="")
     print("")
 
-    for col in range(len(grade)):
-        for row in range(len(grade[col])):
+    for col in range(len(var.grade)):
+        for row in range(len(var.grade[col])):
             if(row > 0):
-                aux = (grade[col][row].start - 8)*11 #- sum_string(col,row)
+                aux = (var.grade[col][row].start - 8)*11 #- sum_string(col,row)
                 print("")
             else:
-                aux = (grade[col][row].start - 8)*11
+                aux = (var.grade[col][row].start - 8)*11
 
             print(" "*aux, end="")
-            print("%s"%(grade[col][row].name), end="")
-            end = (grade[col][row].finish - grade[col][row].start - 1) * 11 + (10-len(grade[col][row].name))
+            print("%s"%(var.grade[col][row].name), end="")
+            end = (var.grade[col][row].finish - var.grade[col][row].start - 1) * 11 + (10-len(var.grade[col][row].name))
             print(" "*end, end="")
             print("*", end="")
         print("")
@@ -72,35 +82,32 @@ def print_the_grades():
         print("")
 
 def intervalPartitioning():
-    global classrooms_file
-    global classrooms
-    global grade
-    global start_activity
-    global finish_activity
-    global number_class_open
+
+    var.reset()
+
     limparTela()
     with open ("companies.csv", "r") as f:
         data = csv.reader(f)
         next(data)
 
         for line in data:
-            classrooms_file.append(Classroom(line[0], int(line[1]), int(line[2])))
+            var.lassrooms_file.append(Classroom(line[0], int(line[1]), int(line[2])))
 
-    classrooms = random.sample(classrooms_file, 10)
+    var.classrooms = random.sample(var.lassrooms_file, 15)
 
-    classrooms.sort(key=lambda x: x.start)
+    var.classrooms.sort(key=lambda x: x.start)
 
-    for i in classrooms:
+    for i in var.classrooms:
         obj_compatibility = search_for_time(i)
-        if((number_class_open == 0) and (len(classrooms) != 0) or (obj_compatibility == -1)):
+        if((var.number_class_open == 0) and (len(var.classrooms) != 0) or (obj_compatibility == -1)):
             aux = []
             aux.append(i)
-            grade.append(aux)
-            number_class_open += 1
+            var.grade.append(aux)
+            var.number_class_open += 1
         elif(obj_compatibility != -1):
-            grade[obj_compatibility].append(i)
+            var.grade[obj_compatibility].append(i)
 
     print_the_grades()
 
-    print("\nA quantidade minima de salas a ser alocada é de %d"%(len(grade) - 1))
+    print("\nA quantidade minima de salas a ser alocada é de %d"%(len(var.grade) - 1))
     pausar()
