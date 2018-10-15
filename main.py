@@ -8,9 +8,8 @@ def menu():
     print("==========================================");
     print("|         >>>>>>>>> Menu <<<<<<<<<       |");
     print("| 1 - interval Scheduling                |");
-    print("| 2 - bbbbbbbbbbbbb                      |");
+    print("| 2 - interval Partitioning              |");
     print("| 3 - minimize Lateness                  |");
-    # outros
     print("| 0 - Sair                               |");
     print("==========================================");
     print("Sua opcao: ");
@@ -26,10 +25,10 @@ while opcao != 0:
     if opcao == 1:
         intervalScheduling()
     elif opcao == 2:
-        #intervalPartitioning()
+        intervalPartitioning()
         a = 1
     elif opcao == 3:
-        minimizeLateness() #Scheduling to Minimize Lateness
+        minimizeLateness()
         a = 1
     elif opcao == 0:
         print("Saindo...")

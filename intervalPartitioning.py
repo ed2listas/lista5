@@ -62,7 +62,7 @@ def print_the_grades():
             print(" "*aux, end="")
             print("%s"%(grade[col][row].name), end="")
             end = (grade[col][row].finish - grade[col][row].start - 1) * 11 + (10-len(grade[col][row].name))
-            print(" "*end, end="")    
+            print(" "*end, end="")
             print("*", end="")
         print("")
 
@@ -70,38 +70,37 @@ def print_the_grades():
             print("-"*10, end="")
             print("|", end="")
         print("")
-    
-with open ("companies.csv", "r") as f:
-    data = csv.reader(f)
-    next(data)
 
-    for line in data:
-        classrooms_file.append(Classroom(line[0], int(line[1]), int(line[2])))
+def intervalPartitioning():
+    global classrooms_file
+    global classrooms
+    global grade
+    global start_activity
+    global finish_activity
+    global number_class_open
+    limparTela()
+    with open ("companies.csv", "r") as f:
+        data = csv.reader(f)
+        next(data)
 
+        for line in data:
+            classrooms_file.append(Classroom(line[0], int(line[1]), int(line[2])))
 
-classrooms = random.sample(classrooms_file, 15)
+    classrooms = random.sample(classrooms_file, 10)
 
-classrooms.sort(key=lambda x: x.start)
+    classrooms.sort(key=lambda x: x.start)
 
+    for i in classrooms:
+        obj_compatibility = search_for_time(i)
+        if((number_class_open == 0) and (len(classrooms) != 0) or (obj_compatibility == -1)):
+            aux = []
+            aux.append(i)
+            grade.append(aux)
+            number_class_open += 1
+        elif(obj_compatibility != -1):
+            grade[obj_compatibility].append(i)
 
-for i in classrooms: 
-    obj_compatibility = search_for_time(i)
+    print_the_grades()
 
-    if(number_class_open == 0 and len(classrooms) != 0 or obj_compatibility == -1):
-        aux = []
-        aux.append(i)
-        grade. append(aux)
-        number_class_open += 1 
-    elif(obj_compatibility != -1):
-        grade[obj_compatibility].append(i)
-
-print_the_grades()
-
-print("")
-
-print("A quantidade minima de salas a ser alocada é de %d"%(len(grade) - 1))
-
-
-
-
-    
+    print("\nA quantidade minima de salas a ser alocada é de %d"%(len(grade) - 1))
+    pausar()
